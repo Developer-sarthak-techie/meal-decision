@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.DietPlanPage"
+             Title="Diet Plan">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20">
+        <Label Text="Advanced Diet Plan" Style="{StaticResource PageTitle}" />
+
+        <Frame Grid.Row="1" Style="{StaticResource CardFrame}">
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Generate Full Day Plan" Style="{StaticResource PrimaryButton}" Command="{Binding GeneratePlanCommand}" />
+                <Grid ColumnDefinitions="*,Auto,Auto" VerticalOptions="Center">
+                    <Label Text="{Binding WaterGlasses, StringFormat='Water: {0} glasses'}" VerticalOptions="Center" />
+                    <Button Grid.Column="1" Text="+1" Command="{Binding AddWaterCommand}" />
+                    <Button Grid.Column="2" Text="Reset" Command="{Binding ResetWaterCommand}" />
+                </Grid>
+                <Label Text="{Binding StatusText}" TextColor="{DynamicResource TextSecondary}" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding DailyPlan}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource CardFrame}">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding TimeSlotLabel}" FontSize="14" TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="{Binding Recipe.DishName}" FontSize="20" FontAttributes="Bold" />
+                            <Label Text="{Binding Recipe.QuickRecipe}" />
+                            <Grid ColumnDefinitions="*,*">
+                                <Label Text="{Binding Recipe.Calories, StringFormat='Calories: {0}'}" />
+                                <Label Grid.Column="1" Text="{Binding Recipe.HealthScore, StringFormat='Health Score: {0}/100'}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

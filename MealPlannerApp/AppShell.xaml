@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MealPlannerApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MealPlannerApp.Views"
+    BackgroundColor="{DynamicResource Background}"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{DynamicResource Surface}"
+    FlyoutWidth="280"
+    Shell.NavBarIsVisible="True"
+    Shell.NavBarHasShadow="True"
+    Title="Aaj Kya Banaye">
+
+    <Shell.FlyoutHeaderBehavior>Fixed</Shell.FlyoutHeaderBehavior>
+
+    <Shell.FlyoutHeader>
+        <Grid Padding="24,28,24,20" RowDefinitions="Auto,Auto,Auto" BackgroundColor="{DynamicResource CardSurface}">
+            <HorizontalStackLayout Spacing="14">
+                <Frame CornerRadius="18" Padding="0" HasShadow="True" WidthRequest="52" HeightRequest="52"
+                       BackgroundColor="{DynamicResource Primary}">
+                    <Label Text="AKB" FontSize="16" FontAttributes="Bold" TextColor="#04111D"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+                <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                    <Label Text="Aaj Kya Banaye" FontSize="20" FontAttributes="Bold" />
+                    <Label Text="Smart Meal Decision" FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <BoxView Grid.Row="1" HeightRequest="1" Color="{DynamicResource PanelBorder}" Margin="0,16,0,0" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="Auto,*" Padding="24,14" ColumnSpacing="16">
+                <Frame WidthRequest="36" HeightRequest="36" CornerRadius="12" Padding="0"
+                       BackgroundColor="{DynamicResource AccentSoft}" HasShadow="False">
+                    <Label Text="●" FontSize="12" TextColor="{DynamicResource Primary}"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15"
+                       VerticalTextAlignment="Center" TextColor="{DynamicResource TextPrimary}" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout Padding="24,12" Spacing="4" BackgroundColor="{DynamicResource CardSurface}">
+            <Label Text="v1.0 MVP" FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+            <Label Text="Ocean • Crimson • Sunset themes" FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+
+    <FlyoutItem Title="🍽  Meal Decision" Route="aajkyabanaye">
+        <ShellContent ContentTemplate="{DataTemplate views:AajKyaBanayePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="👤  Profile Setup" Route="onboarding">
+        <ShellContent ContentTemplate="{DataTemplate views:OnboardingPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="🏋  Fitness Journey" Route="journey">
+        <ShellContent ContentTemplate="{DataTemplate views:JourneyPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="⚙  Settings" Route="settings">
+        <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </FlyoutItem>
+
+</Shell>

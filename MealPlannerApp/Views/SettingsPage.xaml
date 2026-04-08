@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.SettingsPage"
+             Title="Settings">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Settings" Style="{StaticResource PageTitle}" />
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="App Theme" />
+                    <Picker ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme}" />
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                        <Frame Grid.Column="0" CornerRadius="14" Padding="8" BackgroundColor="#112038">
+                            <Label Text="Ocean" HorizontalOptions="Center" />
+                        </Frame>
+                        <Frame Grid.Column="1" CornerRadius="14" Padding="8" BackgroundColor="#2A111C">
+                            <Label Text="Crimson" HorizontalOptions="Center" />
+                        </Frame>
+                        <Frame Grid.Column="2" CornerRadius="14" Padding="8" BackgroundColor="#3A250F">
+                            <Label Text="Sunset" HorizontalOptions="Center" />
+                        </Frame>
+                    </Grid>
+                    <Button Text="Apply Theme" Style="{StaticResource PrimaryButton}" Command="{Binding ApplyThemeCommand}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Goal" />
+                    <Picker ItemsSource="{Binding Goals}" SelectedItem="{Binding SelectedGoal}" />
+                    <Label Text="Diet Preference" />
+                    <Picker ItemsSource="{Binding DietPreferences}" SelectedItem="{Binding SelectedDietPreference}" />
+                    <Button Text="Save Changes" Style="{StaticResource PrimaryButton}" Command="{Binding SaveGoalCommand}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="10">
+                    <Button Text="Reset 21-Day Journey" Command="{Binding ResetJourneyCommand}" />
+                    <Button Text="Reset Profile (Onboarding Again)" Command="{Binding ResetProfileCommand}" />
+                    <Label Text="{Binding StatusText}" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

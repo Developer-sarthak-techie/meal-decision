@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.DashboardPage"
+             Title="Dashboard">
+    <ScrollView>
+        <VerticalStackLayout x:Name="RootLayout" Padding="20" Spacing="10">
+            <Label Text="Fitness Dashboard" Style="{StaticResource PageTitle}" />
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="{DynamicResource Primary}" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Frame Style="{StaticResource CardFrame}">
+                    <VerticalStackLayout>
+                        <Label Text="BMI" FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                        <Label Text="{Binding Summary.Bmi}" FontSize="30" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Column="1" Style="{StaticResource CardFrame}">
+                    <VerticalStackLayout>
+                        <Label Text="Daily Calories" FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                        <Label Text="{Binding Summary.DailyCaloriesTarget}" FontSize="30" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Goal Summary" FontAttributes="Bold" />
+                    <Label Text="{Binding Summary.GoalSummary}" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="21-Day Progress" FontAttributes="Bold" />
+                    <ProgressBar Progress="{Binding Summary.JourneyProgress}" />
+                    <Label Text="{Binding Summary.JourneyProgress, StringFormat='Progress: {0:P0}'}" />
+                    <Label Text="{Binding Summary.CurrentStreak, StringFormat='Current Streak: {0} days'}" TextColor="{StaticResource Success}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

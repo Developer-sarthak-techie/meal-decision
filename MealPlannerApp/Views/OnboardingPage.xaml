@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.OnboardingPage"
+             Title="Onboarding">
+    <ScrollView>
+        <VerticalStackLayout x:Name="RootLayout" Padding="20" Spacing="12" Opacity="0">
+            <Label Text="Aaj Kya Banaye" Style="{StaticResource PageTitle}" />
+            <Label Text="Set your health profile to unlock smart food + fitness planning." TextColor="{DynamicResource TextSecondary}" />
+
+            <Frame Style="{StaticResource CardFrame}">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*">
+                    <Label Text="Height (meters)" />
+                    <Entry Grid.Row="1" Text="{Binding HeightMeters}" Keyboard="Numeric" />
+
+                    <Label Grid.Row="2" Text="Weight (kg)" />
+                    <Entry Grid.Row="3" Text="{Binding WeightKg}" Keyboard="Numeric" />
+
+                    <Label Grid.Row="4" Text="Age" />
+                    <Entry Grid.Row="5" Text="{Binding Age}" Keyboard="Numeric" />
+
+                    <Label Grid.Row="6" Text="Goal" />
+                    <Picker Grid.Row="7" ItemsSource="{Binding Goals}" SelectedItem="{Binding SelectedGoal}" />
+
+                    <Label Grid.Row="8" Text="Diet Preference" />
+                    <Picker Grid.Row="9" ItemsSource="{Binding DietPreferences}" SelectedItem="{Binding SelectedDietPreference}" />
+                </Grid>
+            </Frame>
+
+            <Button Text="Start 21-Day Journey" Style="{StaticResource PrimaryButton}" Command="{Binding SaveProfileCommand}" />
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="{DynamicResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

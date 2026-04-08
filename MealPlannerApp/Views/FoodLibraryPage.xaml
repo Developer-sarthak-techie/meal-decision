@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.FoodLibraryPage"
+             Title="Food Library">
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <Label Text="Natural Food Library" Style="{StaticResource PageTitle}" />
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Foods}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource CardFrame}" Padding="10">
+                        <VerticalStackLayout Spacing="6">
+                            <Image Source="{Binding Image}" HeightRequest="110" Aspect="AspectFill" />
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Benefits}" FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="{Binding BestTimeToEat, StringFormat='Best Time: {0}'}" FontSize="11" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

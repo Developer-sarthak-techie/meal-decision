@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPlannerApp.Views.AajKyaBanayePage"
+             Title="Aaj Kya Banaye">
+    <ScrollView>
+        <VerticalStackLayout x:Name="RootLayout" Padding="20" Spacing="12" Opacity="0">
+            <Frame x:Name="HeroCard" Style="{StaticResource CardFrame}" Padding="0">
+                <Grid Padding="16" ColumnDefinitions="Auto,*">
+                    <Image Source="aaj_logo.svg" WidthRequest="58" HeightRequest="58" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="Aaj Kya Banaye" Style="{StaticResource PageTitle}" FontSize="24" />
+                        <Label Text="Modern Meal Decision • presets • pantry • swap • weekly routine" TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <Frame x:Name="ControlCard" Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout>
+                            <Label Text="Meal Slot" />
+                            <Picker ItemsSource="{Binding MealSlots}" SelectedItem="{Binding SelectedMealSlot}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Day" />
+                            <Picker ItemsSource="{Binding Weekdays}" SelectedItem="{Binding SelectedDay}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout>
+                            <Label Text="Diet" />
+                            <Picker ItemsSource="{Binding DietModes}" SelectedItem="{Binding SelectedDietMode}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Spice" />
+                            <Picker ItemsSource="{Binding SpiceLevels}" SelectedItem="{Binding SelectedSpiceLevel}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout>
+                            <Label Text="Novelty" />
+                            <Picker ItemsSource="{Binding NoveltyLevels}" SelectedItem="{Binding SelectedNovelty}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Occasion" />
+                            <Picker ItemsSource="{Binding Occasions}" SelectedItem="{Binding SelectedOccasion}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout>
+                            <Label Text="Max cook time (min)" />
+                            <Entry Text="{Binding MaxCookTime}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Budget tier" />
+                            <Picker ItemsSource="{Binding BudgetTiers}" SelectedItem="{Binding SelectedBudgetTier}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Entry Placeholder="Pantry ingredients (comma separated)" Text="{Binding PantryInput}" />
+                    <FlexLayout Wrap="Wrap" Direction="Row" AlignItems="Center" JustifyContent="SpaceBetween">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Pantry mode" VerticalTextAlignment="Center" />
+                            <Switch IsToggled="{Binding PantryMode}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Budget mode" VerticalTextAlignment="Center" />
+                            <Switch IsToggled="{Binding BudgetMode}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Tonight mode" VerticalTextAlignment="Center" />
+                            <Switch IsToggled="{Binding TonightMode}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Kids-friendly" VerticalTextAlignment="Center" />
+                            <Switch IsToggled="{Binding KidsFriendly}" />
+                        </HorizontalStackLayout>
+                    </FlexLayout>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Button Grid.Column="0" Text="PG preset" Style="{StaticResource ChipButton}" Command="{Binding ApplyPgPresetCommand}" />
+                        <Button Grid.Column="1" Text="Family veg" Style="{StaticResource ChipButton}" Command="{Binding ApplyFamilyPresetCommand}" />
+                        <Button Grid.Column="2" Text="Budget week" Style="{StaticResource ChipButton}" Command="{Binding ApplyBudgetPresetCommand}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Button Grid.Column="0" Text="Suggest now" Style="{StaticResource PrimaryButton}" Command="{Binding SuggestCommand}" />
+                        <Button Grid.Column="1" Text="Swap" Style="{StaticResource ChipButton}" Command="{Binding SwapCommand}" />
+                        <Button Grid.Column="2" Text="Generate week" Style="{StaticResource ChipButton}" Command="{Binding GenerateWeekCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="{DynamicResource Primary}" />
+            <Label Text="{Binding StatusText}" TextColor="{DynamicResource TextSecondary}" />
+
+            <Frame x:Name="SuggestionCard" Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Primary suggestion" FontAttributes="Bold" />
+                    <Label Text="{Binding PrimarySuggestion.Name}" FontSize="20" FontAttributes="Bold" />
+                    <Label Text="{Binding Explanation}" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="{Binding UniqueCookIdea}" FontSize="12" />
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Label Text="{Binding PrimarySuggestion.TotalTimeMins, StringFormat='Time: {0}m'}" />
+                        <Label Grid.Column="1" Text="{Binding PrimarySuggestion.Calories, StringFormat='Calories: {0}'}" />
+                        <Label Grid.Column="2" Text="{Binding PrimarySuggestion.HealthScore, StringFormat='Health: {0}/100'}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Alternatives}">
+                <CollectionView.Header>
+                    <Label Text="Alternatives" FontAttributes="Bold" />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource CardFrame}">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Cuisine}" FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView x:Name="WeeklyCollection" ItemsSource="{Binding WeeklyPlan}">
+                <CollectionView.Header>
+                    <Label Text="Weekly routine" FontAttributes="Bold" />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource CardFrame}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding Day}" FontAttributes="Bold" />
+                                <Label Text="{Binding Breakfast.Name, StringFormat='Breakfast: {0}'}" FontSize="12" />
+                                <Label Text="{Binding Lunch.Name, StringFormat='Lunch: {0}'}" FontSize="12" />
+                                <Label Text="{Binding Dinner.Name, StringFormat='Dinner: {0}'}" FontSize="12" />
+                                <Label Text="{Binding Snack.Name, StringFormat='Snack: {0}'}" FontSize="12" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
