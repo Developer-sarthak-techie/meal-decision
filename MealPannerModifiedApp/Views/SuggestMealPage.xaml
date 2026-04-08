@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.SuggestMealPage"
+             Title="Suggest meal">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
+        <VerticalStackLayout Spacing="8">
+            <Label Text="What do you feel like?"
+                   FontSize="{DynamicResource FontSizePageTitle}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <Label Text="Pick diet and meal time — we match recipes and show a beginner-friendly walkthrough."
+                   TextColor="{DynamicResource TextSecondary}"
+                   LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1"
+                StrokeShape="RoundRectangle 18"
+                Stroke="{DynamicResource AccentBright}"
+                StrokeThickness="2"
+                BackgroundColor="{DynamicResource SurfaceCard}"
+                Padding="16">
+            <VerticalStackLayout Spacing="14">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Meal type"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Picker x:Name="DietPicker"
+                            Title="Vegetarian / non-veg / mix"
+                            TextColor="{DynamicResource TextPrimary}"
+                            BackgroundColor="{DynamicResource PageBackground}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Meal for"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Picker x:Name="MealPicker"
+                            Title="Breakfast, lunch…"
+                            TextColor="{DynamicResource TextPrimary}"
+                            BackgroundColor="{DynamicResource PageBackground}" />
+                </VerticalStackLayout>
+                <Button Text="Suggest meal"
+                        Clicked="OnSuggestClicked"
+                        BackgroundColor="{DynamicResource AccentBright}"
+                        TextColor="{DynamicResource TextPrimary}"
+                        FontAttributes="Bold"
+                        CornerRadius="14"
+                        HeightRequest="48" />
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView x:Name="ResultScroll"
+                    Grid.Row="2"
+                    IsVisible="False">
+            <VerticalStackLayout x:Name="ResultPanel" Spacing="14" Padding="0,8,0,24">
+                <Label Text="Here's an idea"
+                       FontSize="{DynamicResource FontSizeLead}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextPrimary}" />
+
+                <Border StrokeShape="RoundRectangle 20"
+                        Stroke="{DynamicResource AccentSoft}"
+                        StrokeThickness="2"
+                        Padding="10"
+                        BackgroundColor="{DynamicResource SurfaceCard}">
+                    <Image x:Name="ResultImage"
+                           HeightRequest="200"
+                           Aspect="AspectFit" />
+                </Border>
+
+                <Label x:Name="ResultTitle"
+                       FontSize="{DynamicResource FontSizePageTitle}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextPrimary}"
+                       LineBreakMode="WordWrap" />
+
+                <Label x:Name="ResultMeta"
+                       FontSize="{DynamicResource FontSizeBody}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       LineBreakMode="WordWrap" />
+
+                <Label x:Name="ResultNoobIntro"
+                       FontSize="{DynamicResource FontSizeBody}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       LineBreakMode="WordWrap" />
+
+                <Label Text="Items you'll need"
+                       FontAttributes="Bold"
+                       FontSize="{DynamicResource FontSizeSubtitle}"
+                       TextColor="{DynamicResource TextPrimary}" />
+                <VerticalStackLayout x:Name="IngredientsBox" Spacing="6" />
+
+                <Label Text="Cook this step by step (noob mode)"
+                       FontAttributes="Bold"
+                       FontSize="{DynamicResource FontSizeSubtitle}"
+                       TextColor="{DynamicResource TextPrimary}"
+                       Margin="0,8,0,0" />
+                <VerticalStackLayout x:Name="StepsBox" Spacing="10" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

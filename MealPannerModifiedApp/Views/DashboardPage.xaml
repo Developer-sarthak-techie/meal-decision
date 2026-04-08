@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.DashboardPage"
+             Title="Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="Dashboard"
+                   FontSize="{DynamicResource FontSizeScreenHeader}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <Label Text="Quick overview — connect meal data here later."
+                   TextColor="{DynamicResource TextSecondary}" />
+
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="{DynamicResource AccentBright}"
+                    StrokeThickness="2"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="16">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Today's plan"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label Text="No meals scheduled yet."
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="{DynamicResource AccentSoft}"
+                    StrokeThickness="2"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="16">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Pantry highlights"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label Text="Add ingredients to get smarter suggestions."
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

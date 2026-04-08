@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.HomeRemedyDetailPage"
+             Title="Remedy detail">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="14">
+            <Border StrokeShape="RoundRectangle 12"
+                    BackgroundColor="{DynamicResource AccentSoft}"
+                    StrokeThickness="0"
+                    Padding="14">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="⚠ Medical disclaimer"
+                           FontAttributes="Bold"
+                           FontSize="{DynamicResource FontSizeSubtitle}"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label Text="This screen summarizes common comfort measures for mild, short-term symptoms. It is not medical advice, a prescription, or an emergency guide. For chest pain, breathing difficulty, fainting, confusion, severe pain, high fever with stiff neck, blood in vomit/stool, pregnancy emergencies, or anything that feels wrong — contact emergency services or a clinician now."
+                           FontSize="{DynamicResource FontSizeCaption}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label x:Name="TitleLabel"
+                   FontSize="{DynamicResource FontSizeSection}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}"
+                   LineBreakMode="WordWrap" />
+            <Label x:Name="CategoryLabel"
+                   FontSize="{DynamicResource FontSizeCaption}"
+                   TextColor="{DynamicResource TextSecondary}" />
+
+            <Label Text="Overview"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="OverviewBlock" Spacing="6" />
+
+            <Label Text="Self-care steps"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="SelfCareBlock" Spacing="6" />
+
+            <Label Text="Fluids and food"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="HydrationBlock" Spacing="6" />
+
+            <Label Text="Comfort measures"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="ComfortBlock" Spacing="6" />
+
+            <Label Text="What to avoid"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="AvoidBlock" Spacing="6" />
+
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{DynamicResource AccentBright}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="14">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Seek care promptly if…"
+                           FontAttributes="Bold"
+                           FontSize="{DynamicResource FontSizeSubtitle}"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <VerticalStackLayout x:Name="RedFlagsBlock" Spacing="6" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Trusted public sources (verify there)"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <Label x:Name="SourceNoteLabel"
+                   FontSize="{DynamicResource FontSizeBody}"
+                   TextColor="{DynamicResource TextSecondary}"
+                   LineBreakMode="WordWrap" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="MedlinePlus"
+                        Clicked="OnMedlinePlus"
+                        BackgroundColor="{DynamicResource AccentBright}"
+                        TextColor="{DynamicResource TextPrimary}" />
+                <Button Text="NHS conditions"
+                        Clicked="OnNhs"
+                        BackgroundColor="{DynamicResource AccentSoft}"
+                        TextColor="{DynamicResource TextPrimary}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

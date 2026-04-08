@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MealPannerModifiedApp.Models"
+             x:Class="MealPannerModifiedApp.Views.FitnessGoalPage"
+             Title="FitnessGoal">
+
+    <ContentPage.Resources>
+        <Style x:Key="CrystalSheet" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 26" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="Stroke" Value="{DynamicResource AccentBright}" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#72FFFFFF, Dark=#3A2A1E28}" />
+        </Style>
+        <Style x:Key="CrystalPill" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Padding" Value="14,10" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#58FFFFFF, Dark=#48201830}" />
+            <Setter Property="Stroke" Value="{DynamicResource PanelBorder}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView x:Name="MainScroll">
+        <VerticalStackLayout Padding="16,12,16,32" Spacing="18">
+
+            <!-- Hero -->
+            <VerticalStackLayout Spacing="6" x:Name="HeroBlock" Opacity="0">
+                <Label x:Name="HeroEmoji"
+                       Text="✨"
+                       FontSize="42"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="How do you want to feel?"
+                       FontSize="{DynamicResource FontSizeSection}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextPrimary}"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Tap a vibe, nudge the sliders, and build your 21-day plan."
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"
+                       Margin="8,0" />
+            </VerticalStackLayout>
+
+            <!-- Goal moods -->
+            <Border Style="{StaticResource CrystalSheet}">
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🎯" FontSize="{DynamicResource FontSizeSubtitle}" VerticalOptions="Center" />
+                        <Label Text="Your goal"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource FontSizeLead}"
+                               TextColor="{DynamicResource TextPrimary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <FlexLayout x:Name="GoalFlex"
+                                Direction="Row"
+                                Wrap="Wrap"
+                                JustifyContent="Center"
+                                AlignItems="Start"
+                                AlignContent="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Diet -->
+            <Border Style="{StaticResource CrystalSheet}">
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🍽️" FontSize="{DynamicResource FontSizeSubtitle}" VerticalOptions="Center" />
+                        <Label Text="Food style"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource FontSizeLead}"
+                               TextColor="{DynamicResource TextPrimary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Border x:Name="DietVegBorder"
+                                StyleId="diet_0"
+                                Style="{StaticResource CrystalPill}"
+                                WidthRequest="108">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDietTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                                <Label Text="🥬" FontSize="28" HorizontalTextAlignment="Center" />
+                                <Label Text="Veg" FontSize="{DynamicResource FontSizeCaption}" TextColor="{DynamicResource TextPrimary}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border x:Name="DietNonVegBorder"
+                                StyleId="diet_1"
+                                Style="{StaticResource CrystalPill}"
+                                WidthRequest="108">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDietTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                                <Label Text="🍗" FontSize="28" HorizontalTextAlignment="Center" />
+                                <Label Text="Protein+" FontSize="{DynamicResource FontSizeCaption}" TextColor="{DynamicResource TextPrimary}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border x:Name="DietMixBorder"
+                                StyleId="diet_2"
+                                Style="{StaticResource CrystalPill}"
+                                WidthRequest="108">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDietTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                                <Label Text="🌈" FontSize="28" HorizontalTextAlignment="Center" />
+                                <Label Text="Mix" FontSize="{DynamicResource FontSizeCaption}" TextColor="{DynamicResource TextPrimary}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sliders: “Crystal” readouts -->
+            <Border Style="{StaticResource CrystalSheet}">
+                <VerticalStackLayout Spacing="18">
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="📊" FontSize="{DynamicResource FontSizeSubtitle}" VerticalOptions="Center" />
+                        <Label Text="Body shape"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource FontSizeLead}"
+                               TextColor="{DynamicResource TextPrimary}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <Label Text="Weight"
+                                   Grid.Column="0"
+                                   FontSize="{DynamicResource FontSizeCaption}"
+                                   TextColor="{DynamicResource TextSecondary}"
+                                   VerticalOptions="Center" />
+                            <Border Grid.Column="1" Style="{StaticResource CrystalPill}" Padding="12,6">
+                                <Label x:Name="WeightReadout"
+                                       Text="72 kg"
+                                       FontAttributes="Bold"
+                                       FontSize="{DynamicResource FontSizeSubtitle}"
+                                       TextColor="{DynamicResource TextPrimary}" />
+                            </Border>
+                        </Grid>
+                        <Slider x:Name="WeightSlider"
+                                Minimum="25"
+                                Maximum="250"
+                                Value="72"
+                                MinimumTrackColor="{DynamicResource AccentBright}"
+                                MaximumTrackColor="{DynamicResource PanelBorder}"
+                                ThumbColor="{DynamicResource AccentBright}"
+                                DragStarted="OnSliderDragStarted"
+                                DragCompleted="OnSliderDragCompleted"
+                                ValueChanged="OnWeightSliderChanged" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <Label Text="Height"
+                                   Grid.Column="0"
+                                   FontSize="{DynamicResource FontSizeCaption}"
+                                   TextColor="{DynamicResource TextSecondary}"
+                                   VerticalOptions="Center" />
+                            <Border Grid.Column="1" Style="{StaticResource CrystalPill}" Padding="12,6">
+                                <Label x:Name="HeightReadout"
+                                       Text="174 cm"
+                                       FontAttributes="Bold"
+                                       FontSize="{DynamicResource FontSizeSubtitle}"
+                                       TextColor="{DynamicResource TextPrimary}" />
+                            </Border>
+                        </Grid>
+                        <Slider x:Name="HeightSlider"
+                                Minimum="120"
+                                Maximum="230"
+                                Value="174"
+                                MinimumTrackColor="{DynamicResource AccentBright}"
+                                MaximumTrackColor="{DynamicResource PanelBorder}"
+                                ThumbColor="{DynamicResource AccentBright}"
+                                DragStarted="OnSliderDragStarted"
+                                DragCompleted="OnSliderDragCompleted"
+                                ValueChanged="OnHeightSliderChanged" />
+                    </VerticalStackLayout>
+
+                    <!-- Live BMI crystal -->
+                    <Border x:Name="BmiCrystalPreview"
+                            Style="{StaticResource CrystalPill}"
+                            Padding="16,12"
+                            Margin="0,4,0,0">
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label x:Name="BmiPreviewEmoji"
+                                   Text="💠"
+                                   FontSize="26"
+                                   VerticalOptions="Center" />
+                            <VerticalStackLayout Spacing="0">
+                                <Label x:Name="BmiPreviewValue"
+                                       Text="BMI — "
+                                       FontAttributes="Bold"
+                                       FontSize="{DynamicResource FontSizeSubtitle}"
+                                       TextColor="{DynamicResource TextPrimary}" />
+                                <Label x:Name="BmiPreviewBand"
+                                       Text="Drag sliders to preview"
+                                       FontSize="{DynamicResource FontSizeMicro}"
+                                       TextColor="{DynamicResource TextSecondary}" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button x:Name="GenerateButton"
+                    Text="✦  Craft my 21-day plan  ✦"
+                    Clicked="OnGenerateClicked"
+                    BackgroundColor="{DynamicResource AccentBright}"
+                    TextColor="{DynamicResource TextPrimary}"
+                    FontAttributes="Bold"
+                    FontSize="{DynamicResource FontSizeSubtitle}"
+                    CornerRadius="18"
+                    HeightRequest="52" />
+
+            <!-- Results -->
+            <VerticalStackLayout x:Name="ResultsPanel" Spacing="14" IsVisible="False" Opacity="0">
+                <Border Style="{StaticResource CrystalSheet}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="🎉 Nice — you're set"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource FontSizeLead}"
+                               TextColor="{DynamicResource TextPrimary}" />
+                        <Label x:Name="BmiLabel"
+                               FontAttributes="Bold"
+                               FontSize="{DynamicResource FontSizeSubtitle}"
+                               TextColor="{DynamicResource TextPrimary}" />
+                        <Label x:Name="ProfileSummaryLabel"
+                               FontSize="{DynamicResource FontSizeCaption}"
+                               TextColor="{DynamicResource TextSecondary}"
+                               LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button x:Name="ExportPdfButton"
+                        Text="📄  Export PDF"
+                        Clicked="OnExportPdfClicked"
+                        IsEnabled="False"
+                        BackgroundColor="{DynamicResource AccentSoft}"
+                        TextColor="{DynamicResource TextPrimary}"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="48" />
+
+                <Label Text="💡 Health tips"
+                       FontAttributes="Bold"
+                       FontSize="{DynamicResource FontSizeLead}"
+                       TextColor="{DynamicResource TextPrimary}" />
+                <CollectionView x:Name="TipsCollection" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Border StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="1"
+                                    Margin="0,0,0,8"
+                                    Padding="14"
+                                    BackgroundColor="{AppThemeBinding Light=#66FFFFFF, Dark=#33201028}">
+                                <Border.Stroke>
+                                    <SolidColorBrush Color="{DynamicResource PanelBorder}" />
+                                </Border.Stroke>
+                                <Label Text="{Binding .}"
+                                       TextColor="{DynamicResource TextSecondary}"
+                                       LineBreakMode="WordWrap" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="📅 21-day meal plan"
+                       FontAttributes="Bold"
+                       FontSize="{DynamicResource FontSizeLead}"
+                       TextColor="{DynamicResource TextPrimary}" />
+                <CollectionView x:Name="PlanCollection" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FitnessDayPlan">
+                            <Border StrokeShape="RoundRectangle 18"
+                                    StrokeThickness="1"
+                                    Margin="0,0,0,10"
+                                    Padding="14"
+                                    BackgroundColor="{AppThemeBinding Light=#70FFFFFF, Dark=#38241830}">
+                                <Border.Stroke>
+                                    <SolidColorBrush Color="{DynamicResource AccentBright}" />
+                                </Border.Stroke>
+                                <VerticalStackLayout Spacing="6">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label Text="📌" FontSize="{DynamicResource FontSizeCaption}" VerticalOptions="Center" />
+                                        <Label Text="{Binding DayNumber, StringFormat='Day {0}'}"
+                                               FontSize="{DynamicResource FontSizeSubtitle}"
+                                               FontAttributes="Bold"
+                                               TextColor="{DynamicResource TextPrimary}" />
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding Focus, StringFormat='Focus: {0}'}"
+                                           TextColor="{DynamicResource TextSecondary}" />
+                                    <Label Text="{Binding Breakfast, StringFormat='🌅 {0}'}"
+                                           TextColor="{DynamicResource TextPrimary}"
+                                           LineBreakMode="WordWrap" />
+                                    <Label Text="{Binding Lunch, StringFormat='☀ {0}'}"
+                                           TextColor="{DynamicResource TextPrimary}"
+                                           LineBreakMode="WordWrap" />
+                                    <Label Text="{Binding Dinner, StringFormat='🌙 {0}'}"
+                                           TextColor="{DynamicResource TextPrimary}"
+                                           LineBreakMode="WordWrap" />
+                                    <Label Text="{Binding Snack, StringFormat='✨ {0}'}"
+                                           TextColor="{DynamicResource TextPrimary}"
+                                           LineBreakMode="WordWrap" />
+                                    <Label FontSize="{DynamicResource FontSizeMicro}" TextColor="{DynamicResource TextSecondary}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding DailyCalories, StringFormat='~{0} kcal/day'}" />
+                                                <Span Text=" · " />
+                                                <Span Text="{Binding WaterMlTarget, StringFormat='water target {0} ml'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Lemon Zest (default): light page, bright yellow accents -->
+    <Color x:Key="PageBackground">#FFF9E3</Color>
+    <Color x:Key="AccentBright">#FFC400</Color>
+    <Color x:Key="AccentSoft">#FFE566</Color>
+    <Color x:Key="SurfaceCard">#FFFBF0</Color>
+    <Color x:Key="TextPrimary">#3D2914</Color>
+    <Color x:Key="TextSecondary">#6B5344</Color>
+    <Color x:Key="FlyoutBackground">#FFF3CD</Color>
+    <Color x:Key="FlyoutHeaderBg">#FFE082</Color>
+    <Color x:Key="PanelBorder">#D4A574</Color>
+
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackground}" />
+    </Style>
+</ResourceDictionary>

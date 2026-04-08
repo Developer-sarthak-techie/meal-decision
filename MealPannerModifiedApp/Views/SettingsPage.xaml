@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.SettingsPage"
+             Title="Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="Settings"
+                   FontSize="{DynamicResource FontSizeScreenHeader}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}" />
+
+            <Border StrokeShape="RoundRectangle 16"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Stroke="{DynamicResource PanelBorder}"
+                    StrokeThickness="1"
+                    Padding="16">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Text size"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label TextColor="{DynamicResource TextSecondary}"
+                           LineBreakMode="WordWrap">
+                        Adjust typography across the app (including PDF fitness export). Your choice is saved automatically.
+                    </Label>
+                    <Picker x:Name="FontSizePicker"
+                            Title="Comfort / readability"
+                            TextColor="{DynamicResource TextPrimary}"
+                            BackgroundColor="{DynamicResource PageBackground}"
+                            SelectedIndexChanged="OnFontSizeChanged" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 16"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Stroke="{DynamicResource AccentBright}"
+                    StrokeThickness="2"
+                    Padding="16">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Themes"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label TextColor="{DynamicResource TextSecondary}"
+                           LineBreakMode="WordWrap">
+                        Twelve themes: three warm yellow (light) plus nine dark palettes (slate, ocean, rose, forest, purple, ember, nordic, carbon, teal). Choose on Home (top bar); dark themes switch the system app theme to dark for better contrast.
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 16"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="16">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="About"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label Text="MealPannerModifiedApp — fresh MAUI shell with flyout navigation."
+                           TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Version 1.0"
+                           FontSize="{DynamicResource FontSizeMicro}"
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

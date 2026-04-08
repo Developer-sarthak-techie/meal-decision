@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.SubscriptionPage"
+             Title="Subscription">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Choose your subscription"
+                   FontSize="{DynamicResource FontSizeScreenHeader}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <Label Text="Pick a plan that matches how often you use the app."
+                   TextColor="{DynamicResource TextSecondary}"
+                   LineBreakMode="WordWrap" />
+
+            <Border StrokeShape="RoundRectangle 14"
+                    Stroke="{DynamicResource PanelBorder}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="14">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <RadioButton x:Name="FreePlanRadio"
+                                     GroupName="plans"
+                                     CheckedChanged="OnPlanCheckedChanged" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="3">
+                            <Label Text="Starter (Free)"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextPrimary}" />
+                            <Label Text="Basic meal suggestions and limited recipes."
+                                   TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="₹0 / month" TextColor="{DynamicResource AccentBright}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <RadioButton x:Name="PlusPlanRadio"
+                                     GroupName="plans"
+                                     CheckedChanged="OnPlanCheckedChanged" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="3">
+                            <Label Text="Plus Monthly"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextPrimary}" />
+                            <Label Text="Unlimited meal suggestions + advanced filters."
+                                   TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="₹199 / month" TextColor="{DynamicResource AccentBright}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <RadioButton x:Name="ProPlanRadio"
+                                     GroupName="plans"
+                                     CheckedChanged="OnPlanCheckedChanged" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="3">
+                            <Label Text="Pro Annual"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextPrimary}" />
+                            <Label Text="Everything in Plus + fitness exports and yearly savings."
+                                   TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="₹1499 / year" TextColor="{DynamicResource AccentBright}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <RadioButton x:Name="FamilyPlanRadio"
+                                     GroupName="plans"
+                                     CheckedChanged="OnPlanCheckedChanged" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="3">
+                            <Label Text="Family Plan"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextPrimary}" />
+                            <Label Text="Up to 4 profiles with shared grocery and meal planning."
+                                   TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="₹2499 / year" TextColor="{DynamicResource AccentBright}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{DynamicResource PanelBorder}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="12">
+                <Label x:Name="SelectedPlanLabel"
+                       Text="Selected plan: Starter (Free)"
+                       TextColor="{DynamicResource TextPrimary}" />
+            </Border>
+
+            <Button Text="Confirm subscription"
+                    Clicked="OnConfirmClicked"
+                    BackgroundColor="{DynamicResource AccentBright}"
+                    TextColor="{DynamicResource TextPrimary}"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="48" />
+
+            <Label x:Name="StatusLabel"
+                   FontSize="{DynamicResource FontSizeCaption}"
+                   TextColor="{DynamicResource TextSecondary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

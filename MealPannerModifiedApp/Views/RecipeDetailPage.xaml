@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.RecipeDetailPage"
+             Title="Recipe">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Border StrokeShape="RoundRectangle 20"
+                    Stroke="{DynamicResource AccentBright}"
+                    StrokeThickness="3"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="8">
+                <Image x:Name="HeroImage"
+                       Aspect="AspectFit"
+                       HeightRequest="220"
+                       SemanticProperties.Description="Recipe photo" />
+            </Border>
+
+            <Label x:Name="TitleLabel"
+                   FontSize="{DynamicResource FontSizeSection}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}"
+                   LineBreakMode="WordWrap" />
+
+            <Label x:Name="MetaLabel"
+                   FontSize="{DynamicResource FontSizeBody}"
+                   TextColor="{DynamicResource TextSecondary}" />
+
+            <Label Text="Ingredients"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+
+            <VerticalStackLayout x:Name="IngredientsList" Spacing="6" />
+
+            <Label Text="Steps"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}"
+                   Margin="0,8,0,0" />
+
+            <VerticalStackLayout x:Name="StepsList" Spacing="12" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

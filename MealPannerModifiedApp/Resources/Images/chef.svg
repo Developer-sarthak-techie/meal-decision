@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none">
+  <ellipse cx="120" cy="248" rx="70" ry="12" fill="#000000" opacity="0.08"/>
+  <!-- body / apron -->
+  <path d="M75 165 L85 255 L155 255 L165 165 Q120 150 75 165Z" fill="#F5F5F5" stroke="#3D2914" stroke-width="3"/>
+  <path d="M95 165 L90 255 M145 165 L150 255" stroke="#E0E0E0" stroke-width="2"/>
+  <!-- arms -->
+  <path d="M75 168 L45 195 L50 210 L78 188" fill="#FFCC99" stroke="#3D2914" stroke-width="2.5"/>
+  <path d="M165 168 L195 195 L190 210 L162 188" fill="#FFCC99" stroke="#3D2914" stroke-width="2.5"/>
+  <!-- pan -->
+  <ellipse cx="38" cy="208" rx="22" ry="10" fill="#5D4E37" stroke="#3D2914" stroke-width="2"/>
+  <ellipse cx="38" cy="200" rx="18" ry="6" fill="#8D6E63"/>
+  <!-- head -->
+  <circle cx="120" cy="120" r="48" fill="#FFCC99" stroke="#3D2914" stroke-width="3"/>
+  <!-- eyes -->
+  <ellipse cx="102" cy="115" rx="6" ry="8" fill="#3D2914"/>
+  <ellipse cx="138" cy="115" rx="6" ry="8" fill="#3D2914"/>
+  <circle cx="104" cy="112" r="2" fill="white"/>
+  <circle cx="140" cy="112" r="2" fill="white"/>
+  <!-- smile -->
+  <path d="M100 138 Q120 155 140 138" stroke="#3D2914" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- cheeks -->
+  <circle cx="88" cy="128" r="8" fill="#FFB6A6" opacity="0.7"/>
+  <circle cx="152" cy="128" r="8" fill="#FFB6A6" opacity="0.7"/>
+  <!-- chef hat -->
+  <path d="M72 82 Q120 20 168 82 L160 95 Q120 72 80 95Z" fill="#FFFFFF" stroke="#3D2914" stroke-width="3"/>
+  <path d="M78 95 Q120 78 162 95 L158 108 Q120 92 82 108Z" fill="#F5F5F5" stroke="#3D2914" stroke-width="2"/>
+  <rect x="70" y="105" width="100" height="22" rx="4" fill="#FFFFFF" stroke="#3D2914" stroke-width="3"/>
+</svg>

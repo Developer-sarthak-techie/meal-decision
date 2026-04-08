@@ -39,3 +39,58 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# --- .NET / C# / MAUI (build output, tooling — keep repo light for GitHub) ---
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+*.vshost.*
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.ilk
+*.meta
+
+# Test & coverage
+TestResults/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+
+# NuGet / MSBuild
+*.nupkg
+*.snupkg
+project.lock.json
+artifacts/
+
+# Rider / VS / VS Code (optional local state)
+.idea/
+*.sln.iml
+.vs/
+*.rsuser
+
+# MAUI / mobile packaging (large binaries; built apps live under bin/ anyway)
+*.apk
+*.aab
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.xcarchive
+
+# Android (if opened in Android Studio)
+**/local.properties
+**/.gradle/
+
+# Mac / Xcode user data
+*.xcuserstate
+**/xcuserdata/
+
+# Secrets — never push
+**/secrets.json
+*.pfx
+*.mobileprovision

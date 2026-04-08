@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MealPannerModifiedApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MealPannerModifiedApp.Views"
+    Title="MealPannerModifiedApp"
+    FlyoutBehavior="Flyout"
+    FlyoutWidth="280"
+    BackgroundColor="{DynamicResource PageBackground}"
+    FlyoutBackgroundColor="{DynamicResource FlyoutBackground}">
+
+    <Shell.FlyoutHeader>
+        <Grid Padding="20,28" BackgroundColor="{DynamicResource FlyoutHeaderBg}">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Meal Planner"
+                       FontSize="{DynamicResource FontSizePageTitle}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextPrimary}" />
+                <Label Text="Modified"
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Home" Route="home">
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate views:LandingPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Recipes" Route="recipes">
+        <ShellContent Title="Recipes" ContentTemplate="{DataTemplate views:RecipesHomePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Home remedies" Route="remedies">
+        <ShellContent Title="Home remedies" ContentTemplate="{DataTemplate views:HomeRemediesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Suggest meal" Route="suggest">
+        <ShellContent Title="Suggest meal" ContentTemplate="{DataTemplate views:SuggestMealPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="FitnessGoal" Route="fitnessgoal">
+        <ShellContent Title="FitnessGoal" ContentTemplate="{DataTemplate views:FitnessGoalPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Subscription" Route="subscription">
+        <ShellContent Title="Subscription" ContentTemplate="{DataTemplate views:SubscriptionPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Dashboard" Route="dashboard">
+        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings" Route="settings">
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </FlyoutItem>
+
+</Shell>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MealPannerModifiedApp.Models"
+             x:Class="MealPannerModifiedApp.Views.RecipeListPage"
+             x:Name="PageRoot"
+             Title="Recipes">
+
+    <Grid RowDefinitions="Auto,*" Padding="12">
+        <Label x:Name="HeaderLabel"
+               FontSize="{DynamicResource FontSizeListTitle}"
+               FontAttributes="Bold"
+               TextColor="{DynamicResource TextPrimary}"
+               Margin="8,4,8,12" />
+        <CollectionView x:Name="RecipeCollection"
+                        Grid.Row="1"
+                        SelectionMode="Single"
+                        SelectionChanged="OnRecipeSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Recipe">
+                    <Grid Padding="8" ColumnDefinitions="88,*">
+                        <Border Grid.Column="0"
+                                StrokeShape="RoundRectangle 12"
+                                Stroke="{DynamicResource AccentBright}"
+                                StrokeThickness="2"
+                                HeightRequest="88"
+                                WidthRequest="88"
+                                Padding="4">
+                            <Image Source="{Binding ImageKey}"
+                                   Aspect="AspectFit" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1"
+                                             Padding="12,0,0,0"
+                                             VerticalOptions="Center">
+                            <Label Text="{Binding Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="{DynamicResource FontSizeBodyProminent}"
+                                   TextColor="{DynamicResource TextPrimary}"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                            <Label FontSize="{DynamicResource FontSizeMicro}"
+                                   TextColor="{DynamicResource TextSecondary}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding PrepMinutes, StringFormat='Active ~{0} min'}" />
+                                        <Span Text=" · " />
+                                        <Span Text="{Binding TotalTimeMinutes, StringFormat='total ~{0} min'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
