@@ -34,7 +34,7 @@ public partial class LandingPage : ContentPage
         _fontSizeHandlerReady = true;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
@@ -46,6 +46,12 @@ public partial class LandingPage : ContentPage
         FontSizePicker.SelectedIndex = (int)FontScaleManager.LoadSaved();
         _fontSizeHandlerReady = true;
 
+        DateLineLabel.Text = DateTime.Now.ToString("dddd, MMMM d");
+
+        await RunEntranceAnimationAsync();
+
+        _animCts?.Cancel();
+        _animCts?.Dispose();
         _animCts = new CancellationTokenSource();
         _ = RunChefAnimationAsync(_animCts.Token);
     }
@@ -58,18 +64,79 @@ public partial class LandingPage : ContentPage
         _animCts = null;
     }
 
+    private async Task RunEntranceAnimationAsync()
+    {
+        HeaderBlock.Opacity = 0;
+        HeaderBlock.TranslationY = 16;
+        GlassTray.Opacity = 0;
+        GlassTray.TranslationY = 20;
+        QuickActionsRow.Opacity = 0;
+        QuickActionsRow.TranslationY = 20;
+        ChefCard.Opacity = 0;
+        ChefCard.TranslationY = 24;
+        ChefCard.Scale = 0.96;
+
+        await Task.Delay(40).ConfigureAwait(true);
+
+        await Task.WhenAll(
+            HeaderBlock.FadeTo(1, 420, Easing.CubicOut),
+            HeaderBlock.TranslateTo(0, 0, 420, Easing.CubicOut));
+
+        await Task.WhenAll(
+            GlassTray.FadeTo(1, 380, Easing.CubicOut),
+            GlassTray.TranslateTo(0, 0, 380, Easing.CubicOut));
+
+        await Task.WhenAll(
+            QuickActionsRow.FadeTo(1, 380, Easing.CubicOut),
+            QuickActionsRow.TranslateTo(0, 0, 380, Easing.CubicOut));
+
+        await Task.WhenAll(
+            ChefCard.FadeTo(1, 480, Easing.SinOut),
+            ChefCard.TranslateTo(0, 0, 480, Easing.CubicOut),
+            ChefCard.ScaleTo(1, 480, Easing.CubicOut));
+    }
+
     private async Task RunChefAnimationAsync(CancellationToken ct)
     {
         while (!ct.IsCancellationRequested)
         {
-            await ChefImage.ScaleTo(1.07, 750, Easing.SinInOut);
+            await ChefImage.ScaleTo(1.06, 820, Easing.SinInOut).WaitAsync(ct);
             if (ct.IsCancellationRequested) break;
-            await ChefImage.ScaleTo(1.0, 750, Easing.SinInOut);
+            await ChefImage.ScaleTo(1.0, 820, Easing.SinInOut).WaitAsync(ct);
             if (ct.IsCancellationRequested) break;
-            await ChefImage.TranslateTo(0, -12, 600, Easing.CubicInOut);
+            await ChefImage.TranslateTo(0, -10, 640, Easing.CubicInOut).WaitAsync(ct);
             if (ct.IsCancellationRequested) break;
-            await ChefImage.TranslateTo(0, 0, 600, Easing.CubicInOut);
+            await ChefImage.TranslateTo(0, 0, 640, Easing.CubicInOut).WaitAsync(ct);
         }
+    }
+
+    private async void OnRecipesTapped(object? sender, EventArgs e)
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("//recipes");
+        }
+        catch
+        {
+            /* Route missing or shell not ready — ignore */
+        }
+    }
+
+    private async void OnSuggestTapped(object? sender, EventArgs e)
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("//suggest");
+        }
+        catch
+        {
+        }
+    }
+
+    private void OnChefCardTapped(object? sender, EventArgs e)
+    {
+        if (Shell.Current is not null)
+            Shell.Current.FlyoutIsPresented = true;
     }
 
     private void OnThemeChanged(object? sender, EventArgs e)

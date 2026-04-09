@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealPannerModifiedApp.Views.SpiceDetailPage"
+             Title="Spice detail">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="14">
+            <Border StrokeShape="RoundRectangle 12"
+                    BackgroundColor="{DynamicResource AccentSoft}"
+                    StrokeThickness="0"
+                    Padding="14">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="⚠ Health information disclaimer"
+                           FontAttributes="Bold"
+                           FontSize="{DynamicResource FontSizeSubtitle}"
+                           TextColor="{DynamicResource TextPrimary}" />
+                    <Label Text="This screen is for general food and wellness education. It is not a diagnosis, treatment plan, or supplement label. Spices interact with medications, pregnancy, and conditions differently. For therapeutic doses or extracts, ask a qualified clinician or pharmacist."
+                           FontSize="{DynamicResource FontSizeCaption}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label x:Name="TitleLabel"
+                   FontSize="{DynamicResource FontSizeSection}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}"
+                   LineBreakMode="WordWrap" />
+            <Label x:Name="CategoryLabel"
+                   FontSize="{DynamicResource FontSizeCaption}"
+                   TextColor="{DynamicResource TextSecondary}" />
+
+            <Label Text="Potential wellness benefits (food context)"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="BenefitsBlock" Spacing="6" />
+
+            <Label Text="Health-wise kitchen uses"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource FontSizeLead}"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <VerticalStackLayout x:Name="UsesBlock" Spacing="6" />
+
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{DynamicResource PanelBorder}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource SurfaceCard}"
+                    Padding="14">
+                <Label x:Name="EvidenceLabel"
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       LineBreakMode="WordWrap" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

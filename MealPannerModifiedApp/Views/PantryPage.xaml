@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MealPannerModifiedApp.Models"
+             x:Class="MealPannerModifiedApp.Views.PantryPage"
+             Title="Pantry mode">
+
+    <Grid RowDefinitions="Auto,*" Padding="16,8" RowSpacing="12">
+        <ScrollView Grid.Row="0" MaximumHeightRequest="380">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Cook from your pantry"
+                       FontSize="{DynamicResource FontSizeSection}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextPrimary}" />
+                <Label Text="Pick a meal slot, your diet focus, then list what you have (comma or new line). We match against ingredient lines in the recipe catalog — add basics like oil, salt, onion for better hits."
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       LineBreakMode="WordWrap" />
+
+                <Label Text="Meal type"
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}" />
+                <Picker x:Name="MealTypePicker"
+                        Title="Breakfast, lunch…"
+                        TextColor="{DynamicResource TextPrimary}"
+                        BackgroundColor="{DynamicResource SurfaceCard}" />
+
+                <Label Text="Diet focus"
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}" />
+                <Picker x:Name="DietPicker"
+                        Title="Filters recipe list"
+                        TextColor="{DynamicResource TextPrimary}"
+                        BackgroundColor="{DynamicResource SurfaceCard}" />
+
+                <Label Text="What’s in your pantry?"
+                       FontSize="{DynamicResource FontSizeCaption}"
+                       TextColor="{DynamicResource TextSecondary}" />
+                <Editor x:Name="PantryEditor"
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="120"
+                        MaximumHeightRequest="200"
+                        Placeholder="e.g. rice, tomato, onion, ginger, eggs, oil, salt, turmeric…"
+                        TextColor="{DynamicResource TextPrimary}"
+                        BackgroundColor="{DynamicResource SurfaceCard}"
+                        PlaceholderColor="{DynamicResource TextSecondary}" />
+
+                <Button Text="Find recipes I can make"
+                        Clicked="OnFindClicked"
+                        BackgroundColor="{DynamicResource AccentBright}"
+                        TextColor="{DynamicResource TextPrimary}"
+                        FontAttributes="Bold"
+                        CornerRadius="14"
+                        HeightRequest="50" />
+
+                <Label x:Name="ResultHintLabel"
+                       IsVisible="False"
+                       FontSize="{DynamicResource FontSizeMicro}"
+                       TextColor="{DynamicResource AccentBright}"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <CollectionView x:Name="ResultCollection"
+                        Grid.Row="1"
+                        SelectionMode="Single"
+                        SelectionChanged="OnRecipeSelected"
+                        Margin="0,4,0,0">
+            <CollectionView.EmptyView>
+                <Label Padding="0,24"
+                       HorizontalTextAlignment="Center"
+                       FontSize="{DynamicResource FontSizeBody}"
+                       TextColor="{DynamicResource TextSecondary}"
+                       Text="Matches appear here after you tap “Find recipes”." />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:PantryMatchResult">
+                    <Border StrokeShape="RoundRectangle 14"
+                            Stroke="{DynamicResource PanelBorder}"
+                            StrokeThickness="1"
+                            BackgroundColor="{DynamicResource SurfaceCard}"
+                            Padding="14"
+                            Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Recipe.Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="{DynamicResource FontSizeBody}"
+                                   TextColor="{DynamicResource TextPrimary}"
+                                   LineBreakMode="WordWrap" />
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="›"
+                                   FontSize="{DynamicResource FontSizeLead}"
+                                   TextColor="{DynamicResource AccentBright}"
+                                   VerticalOptions="Start" />
+                            <Label Grid.Row="1" Grid.ColumnSpan="2"
+                                   Text="{Binding MatchSummary}"
+                                   FontSize="{DynamicResource FontSizeMicro}"
+                                   TextColor="{DynamicResource TextSecondary}"
+                                   LineBreakMode="WordWrap" />
+                            <Label Grid.Row="2" Grid.ColumnSpan="2"
+                                   Text="{Binding MissingPreview}"
+                                   FontSize="11"
+                                   TextColor="{DynamicResource TextSecondary}"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

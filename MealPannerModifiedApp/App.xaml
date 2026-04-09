@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/Styles/FontSizes.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Themes/YellowTheme.xaml" />
+                <ResourceDictionary Source="Resources/Styles/PremiumHome.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

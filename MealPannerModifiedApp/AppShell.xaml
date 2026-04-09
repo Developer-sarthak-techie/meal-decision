@@ -32,8 +32,24 @@
         <ShellContent Title="Recipes" ContentTemplate="{DataTemplate views:RecipesHomePage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Pantry mode" Route="pantry">
+        <ShellContent Title="Pantry mode" ContentTemplate="{DataTemplate views:PantryPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Summer shakes" Route="shakes">
+        <ShellContent Title="Summer shakes" ContentTemplate="{DataTemplate views:ShakesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Salads" Route="salads">
+        <ShellContent Title="Salads" ContentTemplate="{DataTemplate views:SaladsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Home remedies" Route="remedies">
         <ShellContent Title="Home remedies" ContentTemplate="{DataTemplate views:HomeRemediesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Spices &amp; herbs" Route="spices">
+        <ShellContent Title="Spices &amp; herbs" ContentTemplate="{DataTemplate views:SpicesPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Suggest meal" Route="suggest">

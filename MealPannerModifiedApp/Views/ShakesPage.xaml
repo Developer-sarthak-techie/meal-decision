@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MealPannerModifiedApp.Models"
+             x:Class="MealPannerModifiedApp.Views.ShakesPage"
+             Title="Summer shakes">
+
+    <Grid RowDefinitions="Auto,*" Padding="16,8" RowSpacing="12">
+        <VerticalStackLayout Grid.Row="0" Spacing="8">
+            <Label Text="Summer shakes &amp; coolers"
+                   FontSize="{DynamicResource FontSizeSection}"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextPrimary}" />
+            <Label x:Name="CountLabel"
+                   FontSize="{DynamicResource FontSizeCaption}"
+                   TextColor="{DynamicResource TextSecondary}"
+                   LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="ShakeCollection"
+                        Grid.Row="1"
+                        SelectionMode="Single"
+                        SelectionChanged="OnShakeSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ShakeRecipe">
+                    <Border StrokeShape="RoundRectangle 14"
+                            Stroke="{DynamicResource PanelBorder}"
+                            StrokeThickness="1"
+                            BackgroundColor="{DynamicResource SurfaceCard}"
+                            Padding="14"
+                            Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12">
+                            <Border Grid.Row="0"
+                                    Grid.RowSpan="3"
+                                    StrokeShape="RoundRectangle 12"
+                                    StrokeThickness="0"
+                                    HeightRequest="72"
+                                    WidthRequest="72"
+                                    BackgroundColor="{DynamicResource AccentSoft}"
+                                    Padding="0"
+                                    VerticalOptions="Start">
+                                <Image Source="{Binding ImageKey}"
+                                       Aspect="AspectFill"
+                                       SemanticProperties.Description="Shake preview" />
+                            </Border>
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="{DynamicResource FontSizeBody}"
+                                   TextColor="{DynamicResource TextPrimary}"
+                                   LineBreakMode="WordWrap" />
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Subtitle}"
+                                   FontSize="{DynamicResource FontSizeMicro}"
+                                   TextColor="{DynamicResource TextSecondary}"
+                                   LineBreakMode="WordWrap" />
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="Open step-by-step →"
+                                   FontSize="11"
+                                   TextColor="{DynamicResource AccentBright}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

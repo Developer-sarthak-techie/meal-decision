@@ -1,69 +1,173 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MealPannerModifiedApp.Views.LandingPage"
-             Title="Home">
+             Title="Home"
+             Shell.NavBarHasShadow="False">
 
-    <Grid RowDefinitions="Auto,*" Padding="0">
-        <!-- Top bar: theme -->
-        <Border Grid.Row="0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource AccentSoft}"
-                Padding="16,12"
-                Margin="0,0,0,8">
-            <VerticalStackLayout Spacing="12">
-                <Label Text="Meal Planner"
-                       FontSize="{DynamicResource FontSizePageTitle}"
-                       FontAttributes="Bold"
-                       TextColor="{DynamicResource TextPrimary}"
-                       VerticalOptions="Center" />
-                <HorizontalStackLayout Spacing="16" VerticalOptions="Center">
-                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                        <Label Text="Theme"
-                               FontSize="{DynamicResource FontSizeCaption}"
-                               TextColor="{DynamicResource TextSecondary}"
-                               VerticalOptions="Center" />
-                        <Picker x:Name="ThemePicker"
-                                Title="Pick"
-                                WidthRequest="150"
-                                TextColor="{DynamicResource TextPrimary}"
-                                BackgroundColor="{DynamicResource SurfaceCard}"
-                                SelectedIndexChanged="OnThemeChanged" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                        <Label Text="Text size"
-                               FontSize="{DynamicResource FontSizeCaption}"
-                               TextColor="{DynamicResource TextSecondary}"
-                               VerticalOptions="Center" />
-                        <Picker x:Name="FontSizePicker"
-                                Title="Size"
-                                WidthRequest="140"
-                                TextColor="{DynamicResource TextPrimary}"
-                                BackgroundColor="{DynamicResource SurfaceCard}"
-                                SelectedIndexChanged="OnFontSizeChanged" />
-                    </HorizontalStackLayout>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Border>
+    <Grid>
+        <!-- Ambient depth: soft accent washes (blur-like layering without platform blur views) -->
+        <Grid IsClippedToBounds="True">
+            <Ellipse WidthRequest="340"
+                     HeightRequest="340"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Margin="-100,-60,0,0"
+                     Fill="{DynamicResource AccentSoft}"
+                     Opacity="0.45" />
+            <Ellipse WidthRequest="280"
+                     HeightRequest="280"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"
+                     Margin="0,0,-72,-40"
+                     Fill="{DynamicResource AccentBright}"
+                     Opacity="0.18" />
+        </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="24" Spacing="20">
-                <Label Text="Welcome back, chef!"
-                       FontSize="{DynamicResource FontSizeHero}"
-                       FontAttributes="Bold"
-                       TextColor="{DynamicResource TextPrimary}"
-                       HorizontalTextAlignment="Center" />
-                <Label Text="Plan something delicious today."
-                       FontSize="{DynamicResource FontSizeSubtitle}"
-                       TextColor="{DynamicResource TextSecondary}"
-                       HorizontalTextAlignment="Center" />
+        <ScrollView x:Name="MainScroll">
+            <VerticalStackLayout Padding="24,16,24,32"
+                                 Spacing="24"
+                                 MaximumWidthRequest="560"
+                                 HorizontalOptions="Center">
 
-                <Border StrokeShape="RoundRectangle 28"
-                        Stroke="{DynamicResource AccentBright}"
-                        StrokeThickness="3"
-                        BackgroundColor="{DynamicResource SurfaceCard}"
-                        Padding="24"
-                        Margin="0,16,0,0">
+                <!-- Hero -->
+                <VerticalStackLayout x:Name="HeaderBlock"
+                                     Spacing="8"
+                                     Opacity="0"
+                                     TranslationY="16">
+                    <Label Text="MEAL PLANNER"
+                           Style="{StaticResource PremiumEyebrowLabel}"
+                           TextTransform="Uppercase" />
+                    <Label Text="Welcome back, chef"
+                           Style="{StaticResource PremiumHeroTitle}" />
+                    <Label x:Name="DateLineLabel"
+                           Style="{StaticResource PremiumSubtitle}" />
+                    <Label Text="Plan something delicious today."
+                           Style="{StaticResource PremiumSubtitle}"
+                           Opacity="0.92" />
+                </VerticalStackLayout>
+
+                <!-- Glass settings sheet -->
+                <Border x:Name="GlassTray"
+                        Style="{StaticResource PremiumGlassPanel}"
+                        Opacity="0"
+                        TranslationY="20">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Appearance"
+                               Style="{StaticResource PremiumSectionTitle}" />
+                        <Grid RowDefinitions="Auto,Auto"
+                              RowSpacing="16"
+                              ColumnDefinitions="72,*"
+                              ColumnSpacing="12">
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Theme"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource PremiumBodySecondary}" />
+                            <Picker x:Name="ThemePicker"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Title="Choose a palette"
+                                    MinimumHeightRequest="44"
+                                    TextColor="{DynamicResource TextPrimary}"
+                                    BackgroundColor="{DynamicResource SurfaceCard}"
+                                    SelectedIndexChanged="OnThemeChanged" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="Text size"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource PremiumBodySecondary}" />
+                            <Picker x:Name="FontSizePicker"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Title="Reading comfort"
+                                    MinimumHeightRequest="44"
+                                    TextColor="{DynamicResource TextPrimary}"
+                                    BackgroundColor="{DynamicResource SurfaceCard}"
+                                    SelectedIndexChanged="OnFontSizeChanged" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Quick actions -->
+                <Grid x:Name="QuickActionsRow"
+                      ColumnDefinitions="*,*"
+                      ColumnSpacing="12"
+                      Opacity="0"
+                      TranslationY="20">
+                    <Border x:Name="RecipesCta"
+                            Grid.Column="0"
+                            StrokeThickness="0"
+                            Padding="16,14"
+                            StrokeShape="RoundRectangle 18">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="{DynamicResource AccentBright}" Offset="0" />
+                                <GradientStop Color="{DynamicResource AccentSoft}" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Shadow>
+                            <Shadow Brush="#38000000" Offset="0,8" Radius="22" Opacity="1" />
+                        </Border.Shadow>
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🍽"
+                                   FontSize="{DynamicResource FontSizeLead}"
+                                   VerticalOptions="Center" />
+                            <Label Text="Recipes"
+                                   Style="{StaticResource PremiumCtaLabel}" />
+                        </HorizontalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRecipesTapped" />
+                        </Border.GestureRecognizers>
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior DefaultAnimationDuration="140"
+                                                   DefaultAnimationEasing="{x:Static Easing.CubicOut}"
+                                                   PressedScale="0.96"
+                                                   PressedOpacity="0.92" />
+                        </Border.Behaviors>
+                    </Border>
+
+                    <Border x:Name="SuggestCta"
+                            Grid.Column="1"
+                            StrokeShape="RoundRectangle 18"
+                            Stroke="{DynamicResource PanelBorder}"
+                            StrokeThickness="1"
+                            Padding="16,14">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="{DynamicResource AccentSoft}" Offset="0" />
+                                <GradientStop Color="{DynamicResource SurfaceCard}" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Shadow>
+                            <Shadow Brush="#30000000" Offset="0,8" Radius="22" Opacity="1" />
+                        </Border.Shadow>
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="✨"
+                                   FontSize="{DynamicResource FontSizeLead}"
+                                   VerticalOptions="Center" />
+                            <Label Text="Suggest"
+                                   Style="{StaticResource PremiumCtaLabel}" />
+                        </HorizontalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSuggestTapped" />
+                        </Border.GestureRecognizers>
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior DefaultAnimationDuration="140"
+                                                   DefaultAnimationEasing="{x:Static Easing.CubicOut}"
+                                                   PressedScale="0.96"
+                                                   PressedOpacity="0.9" />
+                        </Border.Behaviors>
+                    </Border>
+                </Grid>
+
+                <!-- Hero card -->
+                <Border x:Name="ChefCard"
+                        Style="{StaticResource PremiumElevatedCard}"
+                        Opacity="0"
+                        TranslationY="24"
+                        Scale="0.96">
                     <VerticalStackLayout Spacing="16">
                         <Image x:Name="ChefImage"
                                Source="chef"
@@ -72,11 +176,20 @@
                                HorizontalOptions="Center"
                                Aspect="AspectFit"
                                SemanticProperties.Description="Animated chef illustration" />
-                        <Label Text="Open the menu ☰ for Recipes, Home remedies, Dashboard, and Settings."
-                               FontSize="{DynamicResource FontSizeBody}"
-                               TextColor="{DynamicResource TextSecondary}"
-                               HorizontalTextAlignment="Center" />
+                        <Label Text="Tip: open the menu for recipes, remedies, dashboard, and settings—or tap this card."
+                               Style="{StaticResource PremiumBodySecondary}"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChefCardTapped" />
+                    </Border.GestureRecognizers>
+                    <Border.Behaviors>
+                        <toolkit:TouchBehavior DefaultAnimationDuration="160"
+                                               DefaultAnimationEasing="{x:Static Easing.CubicOut}"
+                                               PressedScale="0.985"
+                                               PressedOpacity="0.96" />
+                    </Border.Behaviors>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
